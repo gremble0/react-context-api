@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   const handleButtonClick = () => {
-    console.log("CLICK!");
+    setTheme("light");
   };
 
   return (

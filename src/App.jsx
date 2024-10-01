@@ -10,6 +10,14 @@ const Context = createContext();
 function App() {
   const [tweets, setTweets] = useState(defaultTweets);
   const [theme, setTheme] = useState("light");
+  const setThemeWithStorage = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    setThemeWithStorage(localStorage.getItem("theme"));
+  }, []);
 
   useEffect(() => {
     theme === "light"
@@ -18,7 +26,9 @@ function App() {
   }, [theme]);
 
   return (
-    <Context.Provider value={{ tweets, setTweets, theme, setTheme, user }}>
+    <Context.Provider
+      value={{ tweets, setTweets, theme, setTheme: setThemeWithStorage, user }}
+    >
       <div className="container">
         <Header />
         <Tweets />
